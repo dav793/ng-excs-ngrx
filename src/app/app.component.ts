@@ -1,7 +1,9 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 
-import {Store} from '@ngrx/store';
+import {Store, select} from '@ngrx/store';
 import {Observable} from 'rxjs';
+
+import { SetLangSpanish, SetLangFrench } from './store/actions/simple.actions';
 
 interface AppState {
   message: string;
@@ -25,11 +27,11 @@ export class AppComponent {
     switch (language) {
 
       case 'spanish':
-        this.store.dispatch({type: 'SPANISH'});
+        this.store.dispatch(new SetLangSpanish());
         break;
 
       case 'french':
-        this.store.dispatch({type: 'FRENCH'});
+        this.store.dispatch(new SetLangFrench());
         break;
 
     }
