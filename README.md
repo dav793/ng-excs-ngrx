@@ -47,13 +47,25 @@ Es una estructura de datos inmutable. El *store* está compuesto de *states*.
 ### Actions
 Representan eventos disparados por la aplicación. Algo importante de recalcar es que las acciones son únicamente mensajes, su único propósito es notificar a la aplicación sobre la ocurrencia de un evento. Las acciones **no modifican el estado directamente**.
 
-Se acostumbra a escribir los nombres de las acciones en mayúsculas por convención de NgRx. 
+Existe una convención de acostumbrar a escribir los nombres de las acciones en mayúsculas. Hasta ahora, esta convención es popular pero no necesariamente ubicua.
 
 e.g. `DELETE POST`
 
 Si se necesita diferenciar entre acciones con el mismo nombre pero emitidos por distintos componentes, se puede usar como prefijo el nombre del componente que origina el evento, rodeado de paréntesis angulares.
 
 e.g. `[AppComponent] DELETE POST`
+
+¿Cuales son algunos tipos de eventos que pueden ser descritos con acciones?
+* Interacciones del usuario con el UI
+* Network requests
+* Eventos a nivel de lógica
+
+Propiedades de buenas acciones (según el equipo de NgRx):
+* Upfront: Escriba las acciones previo a desarrollar los features.
+* Divide: Categorice las acciones basado en la fuente de los eventos.
+* Many: Las acciones son baratas; no trate de racionarlas. Agregue tantas como necesita para expresar los flujos en la aplicación.
+* Event-Driven: Capture eventos, **no** órdenes. Es importante separar la descripción de un evento del manejo del evento.
+* Descriptive: Las acciones deben describir un evento único; no capture varios eventos en una sola acción.
 
 ### Reducers
 Son **funciones puras** que modifican el estado. Son las **únicas** capaces de modificar directamente el estado.
