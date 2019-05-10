@@ -1,0 +1,18 @@
+
+<div *ngFor="let game of allGames$ | async">
+
+    <div (click)="openGame(game)" class="grid clickable">
+        <div class="home">
+            <h4>{{ game.teamHome }}</h4>
+            <p>{{ game.score.home }}</p>
+        </div>
+        <div class="buffer">
+            <h4 class="light-font">vs</h4>
+        </div>
+        <div class="visitor">
+            <h4>{{ game.teamVisitor }}</h4>
+            <p>{{ game.score.visitor }}</p>
+        </div>
+    </div>
+
+</div>

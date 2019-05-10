@@ -45,37 +45,63 @@ Es la entidad que contiene TODO el estado de la aplicación. Se puede pensar com
 Es una estructura de datos inmutable. El *store* está compuesto de *states*.
 
 ### Actions
-Representan eventos disparados por la aplicación. Algo importante de recalcar es que las acciones son únicamente mensajes, su único propósito es notificar a la aplicación sobre la ocurrencia de un evento. Las acciones **no modifican el estado directamente**.
+Representan eventos disparados por la aplicación. Las acciones son únicamente mensajes, su único propósito es notificar a la aplicación sobre la ocurrencia de un evento. Las acciones **no modifican el estado directamente**.
 
-Existe una convención de acostumbrar a escribir los nombres de las acciones en mayúsculas. Hasta ahora, esta convención es popular pero no necesariamente ubicua.
+En concreto, son objetos que tienen una propiedad `type` y opcionalmente una propiedad `payload`:
+```js
+    {
+        type: '[PostComponent] Delete Post',
+        payload: post._id
+    }
+```
 
-e.g. `DELETE POST`
+La parte rodeada por `[]` en el tipo de la acción es el componente o dominio de aplicación del que se origina la acción. La parte derecha es la descripción de la acción.
 
-Si se necesita diferenciar entre acciones con el mismo nombre pero emitidos por distintos componentes, se puede usar como prefijo el nombre del componente que origina el evento, rodeado de paréntesis angulares.
+#### Categorías de acciones
 
-e.g. `[AppComponent] DELETE POST`
+* Commands: Le ordenan a alguna parte del sistema que haga algo (e.g. invocar un método o subrutina). Pueden o no esperar una respuesta.
+```js
+    {
+        type: '[Todo API] Add Todo',    // verbos en infinitivo
+        payload: todoBody 
+    }
+```            
 
-¿Cuales son algunos tipos de eventos que pueden ser descritos con acciones?
-* Interacciones del usuario con el UI
-* Network requests
-* Eventos a nivel de lógica
+* Events: Le informan al sistema que algo ocurrió (e.g. click del mouse). Nunca esperan una respuesta; son fire-and-forget.
+```js
+    {
+        type: '[Email] Opened email',   // verbos en pretérito
+        payload: email._id 
+    }
+```
 
-Propiedades de buenas acciones (según el equipo de NgRx):
-* Upfront: Escriba las acciones previo a desarrollar los features.
-* Divide: Categorice las acciones basado en la fuente de los eventos.
-* Many: Las acciones son baratas; no trate de racionarlas. Agregue tantas como necesita para expresar los flujos en la aplicación.
-* Event-Driven: Capture eventos, **no** órdenes. Es importante separar la descripción de un evento del manejo del evento.
-* Descriptive: Las acciones deben describir un evento único; no capture varios eventos en una sola acción.
+* Documents: Actualizan los datos de alguna entidad (i.e. documento) almacenada. Tampoco esperan una respuesta. 
+```js
+    {
+        type: 'Todo',                   // sustantivos
+        payload: todoBody 
+    }
+```
 
 ### Reducers
-Son **funciones puras** que modifican el estado. Son las **únicas** capaces de modificar directamente el estado.
+Son las encargadas de manejar la transición de un estado al siguiente. 
+Son **funciones puras**, y son las **únicas** capaces de modificar directamente el estado.
 
 ### Effects
+Son las encargadas de procesar side-effects (e.g. network requests, mensajes de web sockets, procedimientos asíncronos, etc.).
+
+Sin NgRx, en una aplicación de Angular típicamente los componentes son responsables de interactuar con 
+recursos externos mediante servicios. 
+
+Con NgRx, los Effects proveen una forma de interactuar con esos 
+servicios y aislarlos de los componentes. Así, los efectos reducen la responsabilidad de los componentes y los hacen más estables y fáciles de probar. 
+
+Esto puede ser de especial importancia en aplicaciones grandes y/o complejas.
 
 ### Selectors
 
 ## Dev Tools
-Es recomendado usar las [herramientas para desarrolladores](https://ngrx.io/guide/store-devtools) que facilitan la depuración del sistema de manejo de estado.
+Se recomienda usar las [herramientas para desarrolladores](https://ngrx.io/guide/store-devtools) que facilitan la depuración del sistema de manejo de estado.
 
 ## Recursos
 

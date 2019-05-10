@@ -1,7 +1,14 @@
 
-<h2>{{ message$ | async }}</h2>
+<div class="app-grid">
 
-<button (click)="setLang('spanish')">Spanish</button>
-<button (click)="setLang('french')">French</button>
+    <div class="games-list">
+        <app-games-list></app-games-list>
+    </div>
 
-<router-outlet></router-outlet>
+    <div class="buffer"></div>
+
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

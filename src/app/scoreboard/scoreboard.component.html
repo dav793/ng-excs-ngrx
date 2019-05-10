@@ -1,0 +1,29 @@
+
+<ng-container *ngIf="(game$ | async)">
+
+    <h1>{{ (game$ | async)?.getLabel() }}</h1>
+
+    <table>
+        <tr>
+            <th>Casa</th>
+            <th>Visitante</th>
+        </tr>
+        <tr>
+            <td>{{ (game$ | async)?.score.home }}</td>
+            <td>{{ (game$ | async)?.score.visitor }}</td>
+        </tr>
+    </table>
+
+    <br />
+
+    <span>Anotación: </span>
+    <button (click)="scoreHome()">Casa</button>
+    <button (click)="scoreVisitor()">Visitante</button>
+
+    <br />
+    <br />
+
+    <button (click)="resetScore()">Reiniciar</button>
+
+</ng-container>
+
