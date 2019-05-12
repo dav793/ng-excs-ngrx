@@ -16,7 +16,7 @@ import {
 
 import * as _ from 'lodash';
 
-import {Game} from './game.model';
+import { Game } from './game.model';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +24,7 @@ import {Game} from './game.model';
 export class GamesService {
 
     _games: Game[] = [
-        new Game({
+        {
             _id: '0',
             teamHome: 'Deportivo Saprissa',
             teamVisitor: 'Liga Deportiva Alajuelense',
@@ -32,9 +32,8 @@ export class GamesService {
                 home: 0,
                 visitor: 0
             }
-        }),
-
-        new Game({
+        },
+        {
             _id: '1',
             teamHome: 'C.S. Herediano',
             teamVisitor: 'C.S. Cartaginés',
@@ -42,9 +41,8 @@ export class GamesService {
                 home: 0,
                 visitor: 0
             }
-        }),
-
-        new Game({
+        },
+        {
             _id: '2',
             teamHome: 'A.D. Municipal Pérez Zeledón',
             teamVisitor: 'A.D San Carlos',
@@ -52,7 +50,7 @@ export class GamesService {
                 home: 0,
                 visitor: 0
             }
-        })
+        }
     ];
 
     constructor() { }

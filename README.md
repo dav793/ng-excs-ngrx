@@ -100,6 +100,21 @@ Esto puede ser de especial importancia en aplicaciones grandes y/o complejas.
 
 ### Selectors
 
+### Buenas prácticas
+
+* **No guarde instancias de clases en el store.** Use interfaces en su lugar.
+
+* **No guarde cualquier cosa en el store.** Lo que se guarde en el store debe tener una razón para estar ahí. Si el estado de un componente no afecta nada del estado de la aplicación, probablemente no deba estar en el store.   
+
+* **Evite guardar listas enormes en el store.** El store no es una base de datos local para el cliente. Usarlo de esa forma puede llevar a problemas de desempeño.
+
+* **Mantenga el estado tan plano como sea posible.** Evite estados con muchos niveles de anidación.
+
+* **Use clases para crear sus acciones.** Promueve el type-safety y el uso indoloro del sistema de manejo de estado. 
+
+* **Procure mantener la consistencia.** Por ejemplo, cuando una acción solo necesita 1 propiedad en el payload, en lugar de definir el payload así: `payload: User;`, procure definirlo así: `payload: {user: User};` para promover la consistencia.
+
+
 ## Dev Tools
 Se recomienda usar las [herramientas para desarrolladores](https://ngrx.io/guide/store-devtools) que facilitan la depuración del sistema de manejo de estado.
 
@@ -109,3 +124,4 @@ Se recomienda usar las [herramientas para desarrolladores](https://ngrx.io/guide
 * [Functional Programming](https://medium.freecodecamp.org/an-introduction-to-the-basic-principles-of-functional-programming-a2c2a15c84)
 * [Devtools](https://ngrx.io/guide/store-devtools)
 * [Patterns & Best Practices](https://www.youtube.com/watch?v=EerD9dTaqMM&t=602s)
+* [Redux Best Practices](https://blog.strongbrew.io/Redux-best-practices/)

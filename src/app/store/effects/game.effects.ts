@@ -4,11 +4,12 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import {of, iif, throwError} from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
+import { ToastrService } from 'ngx-toastr';
+
 import * as GameActions from '../actions/game.actions';
 
 import { Game } from '../../games/game.model';
 import { GamesService } from '../../games/games.service';
-import {Action} from '@ngrx/store';
 
 @Injectable()
 export class GameEffects {
@@ -17,12 +18,29 @@ export class GameEffects {
     updateGame$ = this.actions$.pipe(
         ofType(GameActions.ActionTypes.UpdateGame),
         mergeMap((action: any) => {
+
+            const savingToast = this.toastr.show('Please wait...', 'Saving', {
+                toastClass: 'ngx-toastr ngx-custom-default',
+                timeOut: 3000
+            });
+
             return this.gamesService.updateById(action.payload._id, action.payload).pipe(
                 map(status => {
-                    if (status === 200)
+                    if (status === 200) {
+
+                        this.toastr.clear(savingToast.toastId);
+                        this.toastr.success('', 'Saved!', { timeOut: 3000 });
+
                         return { type: GameActions.ActionTypes.LoadAllGames };
-                    else
+                    }
+                    else {
+
+                        this.toastr.clear(savingToast.toastId);
+                        this.toastr.error('An error ocurred.', 'Oops!', { timeOut: 3000 });
+
                         return new Error('Could not update game');
+
+                    }
                 })
             );
         })
@@ -45,7 +63,8 @@ export class GameEffects {
 
     constructor(
         private actions$: Actions,
-        private gamesService: GamesService
+        private gamesService: GamesService,
+        private toastr: ToastrService
     ) {}
 
 }

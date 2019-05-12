@@ -11,6 +11,11 @@
     font-weight: normal;
 }
 
+.border-box {
+    border: 1px solid #e5e5e5;
+    margin: 5px 0;
+}
+
 .grid {
     display: grid;
     grid-template-columns: 45% 10% 45%;

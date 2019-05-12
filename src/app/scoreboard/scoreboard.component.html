@@ -1,7 +1,7 @@
 
 <ng-container *ngIf="(game$ | async)">
 
-    <h1>{{ (game$ | async)?.getLabel() }}</h1>
+    <h1>{{ (game$ | async)?.teamHome }} vs {{ (game$ | async)?.teamVisitor }}</h1>
 
     <table>
         <tr>

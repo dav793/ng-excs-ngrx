@@ -1,5 +1,15 @@
 
-export class Game {
+export interface Game {
+    _id: string;
+    teamHome: string;
+    teamVisitor: string;
+    score: {
+        home: number,
+        visitor: number
+    };
+}
+
+export class GameObj {
     _id: string;
     teamHome: string;
     teamVisitor: string;

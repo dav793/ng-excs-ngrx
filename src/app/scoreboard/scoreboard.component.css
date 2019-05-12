@@ -1,0 +1,4 @@
+
+table tr:first-child th:first-child {
+    padding-right: 100px;
+}

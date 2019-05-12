@@ -1,4 +1,8 @@
 
+.app {
+    position: relative;
+}
+
 .app-grid {
     display: grid;
     grid-template-columns: 300px 50px auto;
